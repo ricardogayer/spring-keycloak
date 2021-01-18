@@ -96,6 +96,7 @@ public class ProdutoController {
         return null;
     }
 
+    // Public (sem necessidade de autenticação end-point)
     @GetMapping("/public/produtos")
     public ResponseEntity<List<Produto>> getPublicProdutos() {
         List<Produto> produtos = produtoRepository.findAll();
