@@ -4,6 +4,7 @@ import org.keycloak.KeycloakPrincipal;
 import org.keycloak.adapters.springsecurity.account.SimpleKeycloakAccount;
 import org.keycloak.representations.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -94,5 +95,12 @@ public class ProdutoController {
 
         return null;
     }
+
+    @GetMapping("/public/produtos")
+    public ResponseEntity<List<Produto>> getPublicProdutos() {
+        List<Produto> produtos = produtoRepository.findAll();
+        return ResponseEntity.ok(produtos);
+    }
+
 
 }
