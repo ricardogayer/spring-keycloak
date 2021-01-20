@@ -16,12 +16,22 @@
 
     <properties>
         <java.version>11</java.version>
+        <!-- Copiar do Eureka Server -->
+        <spring-cloud.version>2020.0.0</spring-cloud.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-eureka-client -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <!-- remover a versão aqui !!! -->
+            <!-- <version>3.0.0</version> -->
         </dependency>
 
         <dependency>
