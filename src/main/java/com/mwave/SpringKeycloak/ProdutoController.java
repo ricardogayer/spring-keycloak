@@ -4,6 +4,7 @@ import org.keycloak.KeycloakPrincipal;
 import org.keycloak.adapters.springsecurity.account.SimpleKeycloakAccount;
 import org.keycloak.representations.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,6 +24,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/")
 public class ProdutoController {
+
+    @Autowired
+    Environment env;
 
     ProdutoRepository produtoRepository;
 
@@ -99,6 +103,7 @@ public class ProdutoController {
     // Public (sem necessidade de autenticação end-point)
     @GetMapping("/public/produtos")
     public ResponseEntity<List<Produto>> getPublicProdutos() {
+        System.out.println("Listando todos os produtos no end-point público!!! - Porta = " + env.getProperty("local.server.port"));
         List<Produto> produtos = produtoRepository.findAll();
         return ResponseEntity.ok(produtos);
     }
