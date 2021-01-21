@@ -117,6 +117,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/public/msg")
+    // @GetMapping(path = "/public/msg", produces = "text/plain;charset=ISO-8859-1")
     public String getMensagem(Locale locale) {
         String msg = String.format(messages.getMessage("license.create.message",null,locale), "licença #123");
         return msg;

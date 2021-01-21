@@ -32,4 +32,10 @@ public class SpringKeycloakApplication {
 		return messageSource;
 	}
 
+	/*
+	If you are using intellij go to file encoding and set global and project encoding to UTF-8,
+	same goes for the default encoding for properties files and -very important- check
+	the Transaparent native-to-ascii conversion.
+	 */
+
 }
