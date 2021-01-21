@@ -4,6 +4,7 @@ import org.keycloak.KeycloakPrincipal;
 import org.keycloak.adapters.springsecurity.account.SimpleKeycloakAccount;
 import org.keycloak.representations.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PostAuthorize;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.security.RolesAllowed;
 import java.security.Principal;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
@@ -27,6 +29,9 @@ public class ProdutoController {
 
     @Autowired
     Environment env;
+
+    @Autowired
+    MessageSource messages;
 
     ProdutoRepository produtoRepository;
 
@@ -102,10 +107,19 @@ public class ProdutoController {
 
     // Public (sem necessidade de autenticação end-point)
     @GetMapping("/public/produtos")
-    public ResponseEntity<List<Produto>> getPublicProdutos() {
+    public ResponseEntity<List<Produto>> getPublicProdutos(Locale locale) {
+
+        System.out.println(String.format(messages.getMessage("license.create.message",null,locale), "licença #123"));
+
         System.out.println("Listando todos os produtos no end-point público!!! - Porta = " + env.getProperty("local.server.port"));
         List<Produto> produtos = produtoRepository.findAll();
         return ResponseEntity.ok(produtos);
+    }
+
+    @GetMapping("/public/msg")
+    public String getMensagem(Locale locale) {
+        String msg = String.format(messages.getMessage("license.create.message",null,locale), "licença #123");
+        return msg;
     }
 
 
